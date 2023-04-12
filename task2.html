@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css"> 
+</head>
+<body>
+    <div class="container">
+    <h1>
+Задача 2. Створити об’єкт «Авто». 
+Авто	
+Поля(властивості)
+Марка
+Розмір бака
+Кількість наявних літрів
+Кількість місць
+Кількість пасажирів
+Методи (дії)
+Заправка на вказану кількість літрів
+Виведення кількості пасажирів
+Додавання пасажирів
+Висадка пасажирів
+    </h1>
+    <a href="./index.html">Повернутись до задач</a>
+    
+        <script>
+ function Auto(brand,tankSize,fuelLevel,seatCount,passengerCount){
+  this.brand=brand,
+  this.tankSize=tankSize,
+  this.fuelLevel=fuelLevel,
+  this.seatCount=seatCount,
+  this.passengerCount=passengerCount
+ }
+ Auto.prototype.refuel=function(liters){
+  if(liters<0)throw new Error (`Невірна кількість літрів для заправки`)
+  if (this.fuelLevel+liters>this.tankSize)
+  throw new Error (`Переповнення бака`)
+  this.fuelLevel+=liters
+  console.log(`Заправлено :${liters} літрів палива`)
+  console.log(`Рівень палива :${this.fuelLevel}літрів`) 
+ }
+  //виведення кількості пассажирів
+  Auto.prototype.showPassengerCount=function(){
+   console.log(`Кількість пассажирів:${this.passengerCount}`)
+  }
+  //додавання пассажирів
+  Auto.prototype.addPassengers=function(count){
+    if (count<0) throw new Error(`Невірна кількість пассажирів`)
+    if (this.passengerCount+count>this.seatCount) throw new Error (`Недостатньо місць для пассажирів`)
+    this.passengerCount+=count
+    console.log(`Додано: ${count}пассажирів`)
+  }
+    Auto.prototype.removePassengers= function (count) {
+      if (count<0) throw new Error (`Невірна кількість пассажирів`)
+      if(this.passengerCount-count<0) throw new Error(`Неможливо висадити більше пассажирів ніж наявно `)
+      this.passengerCount-=count
+      console.log(`Висаджено :${count} пассажирів`)
+      
+    }
+    let car=new Auto('Toyota',60,30,5,2)
+   console.log(car.brand)
+   car.showPassengerCount();
+car.addPassengers(3);
+car.removePassengers(1);
+car.showPassengerCount();
+car.refuel(20);
+</script>
+</body>
+
+</html>

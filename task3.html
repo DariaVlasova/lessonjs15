@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        Задача 3. Розробити клас MultChecker для перевірки таблиці множення Поля
+        Число, яке перевіряємо (наприклад, перевірка частини таблиці множення на
+        7) Кількість правильних відповідей Кількість неправильних відповідей
+        Методи Генерування прикладу (метод випадковим чином визначає друге
+        число, перше число фіксоване) Перевірка правильності вказаної відповіді
+        render - виведення інформації про тестування на екран
+      </h1>
+      <a class="button" href="./index.html">Повернутись до задач</a>
+      <script>
+        const checkingNum = parseInt(
+          prompt(`Введить цифру для тренування таблиці множення `)
+        );
+        class MultChecker {
+          constructor(checkingNum) {
+            this.checkingNum = checkingNum;
+            this.numberCorrectAnswer = 0;
+            this.numberWrongAnswers = 0;
+          }
+          generationExample() {
+            let numRandom = 1 + Math.floor(Math.random() * 10);
+            let numCorrect = this.checkingNum * numRandom;
+            return { numRandom, numCorrect };
+          }
+          answerCheckUser() {
+            let userPlay = true;
+            do {
+              let { numRandom, numCorrect } = this.generationExample();
+              let answerUser = parseInt(
+                prompt(`${this.checkingNum}*${numRandom}=`)
+              );
+              if (answerUser === numCorrect) {
+                this.numberCorrectAnswer++;
+                alert(
+                  `Вірно! Вірних відповідей:${this.numberCorrectAnswer},помилкових відповідей:${this.numberWrongAnswers} `
+                );
+              } else {
+                this.numberWrongAnswers++;
+                alert(
+                  `Невірно! Вірних відповідей:${this.numberCorrectAnswer},помилкових відповідей:${this.numberWrongAnswers} `
+                );
+              }
+              userPlay = confirm(`Продовжимо?`);
+            } while (userPlay);
+          }
+          result() {
+            document.write(
+              `Цифра на якій тренувались :${this.checkingNum},вірних відповідей:${this.numberCorrectAnswer},помилкових відповідей:${this.numberWrongAnswers}`
+            );
+          }
+        }
+        const multChecker = new MultChecker(checkingNum);
+        multChecker.answerCheckUser();
+        multChecker.result();
+      </script>
+    </div>
+  </body>
+</html>
